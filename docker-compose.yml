@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    image: "users-test-backend"
+    ports:
+      - "5000:5000"
+  frontend:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    image: "users-test-frontend"
+    ports:
+      - "3000:3000"
+    links:
+      - "backend:be"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
